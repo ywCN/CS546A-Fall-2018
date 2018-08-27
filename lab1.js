@@ -15,9 +15,9 @@ const questionFour = function questionFour(num) {
 };
 
 module.exports = {
-  firstName: 'YOUR FIRST NAME',
-  lastName: 'YOUR LAST NAME',
-  studentId: 'YOUR STUDENT ID',
+  firstName: 'YOUHAO',
+  lastName: 'WANG',
+  studentId: '10423006',
   questionOne,
   questionTwo,
   questionThree,
