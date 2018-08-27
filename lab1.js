@@ -24,7 +24,15 @@ const questionThree = function questionThree(text) {
 };
 
 const questionFour = function questionFour(num) {
-  // Implement question 4 here
+  if (num < 0) {
+    return NaN;
+  }
+
+  const arr = [1];
+  for (let i = 1; i <= num; i++) {
+    arr[i] = arr[i - 1] * i;
+  }
+  return arr[num];
 };
 
 module.exports = {
