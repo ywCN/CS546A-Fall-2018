@@ -1,5 +1,9 @@
 const questionOne = function questionOne(arr) {
-  return arr.reduce((accum, num) => accum + num * num, 0);
+  let accum = 0;
+  for (const num of arr) {
+    accum += num * num;
+  }
+  return accum;
 };
 
 const questionTwo = function questionTwo(num) {
