@@ -15,7 +15,12 @@ const questionTwo = function questionTwo(num) {
 };
 
 const questionThree = function questionThree(text) {
-  // Implement question 3 here
+  const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+  let count = 0;
+  for (const char of text) {
+    count += vowels.has(char) ? 1 : 0;
+  }
+  return count;
 };
 
 const questionFour = function questionFour(num) {
