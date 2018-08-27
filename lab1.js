@@ -7,7 +7,11 @@ const questionOne = function questionOne(arr) {
 };
 
 const questionTwo = function questionTwo(num) {
-  // Implement question 2 here
+  const arr = [0, 1];
+  for (let i = 2; i <= num; i++) {
+    arr[i] = arr[i - 1] + arr[i - 2];
+  }
+  return arr[num];
 };
 
 const questionThree = function questionThree(text) {
