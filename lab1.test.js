@@ -2,14 +2,14 @@ const lab1 = require('./lab1');
 
 console.log(lab1.questionOne([1, 2, 3]));
 // should output 14
-console.log(lab1.questionOne([0, 0, 0]));
-// should output 0
-console.log(lab1.questionOne([-1, 0, 1]));
+console.log(lab1.questionOne([0, 0, 0, 1]));
 // should output 1
-console.log(lab1.questionOne([100, 1000, 10000]));
-// should output 101010000
-console.log(lab1.questionOne([-2, 22, -222]));
-// should output 49772
+console.log(lab1.questionOne([-1, 0, 1, -7]));
+// should output 51
+console.log(lab1.questionOne([100, 1000, 10000, 100000]));
+// should output 10101010000
+console.log(lab1.questionOne([-2, 22]));
+// should output 488
 
 console.log(lab1.questionTwo(7));
 // should output 13
