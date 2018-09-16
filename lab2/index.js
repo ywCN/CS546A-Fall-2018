@@ -17,6 +17,6 @@ console.log(deepEquality(obj6, obj7)); // false
 console.log('----------------uniqueElements()----------------');
 console.log(uniqueElements([])); // 0
 console.log(uniqueElements([0])); // 1
-console.log(uniqueElements([1, 2, 2, 3, 3, 3])); // 3
-console.log(uniqueElements([1, 2, '2', 3, '3', undefined])); // 6
-console.log(uniqueElements(['hello', 'hi', ['yo', 233], { meh: 'pizza' }])); // 4
+console.log(uniqueElements([1, 2, 2])); // 2
+console.log(uniqueElements([1, 2, '2'])); // 3
+console.log(uniqueElements([undefined, 'undefined', ['yo', 1], { a: 'a' }])); // 4
