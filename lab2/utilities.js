@@ -44,6 +44,12 @@ const deepEquality = (obj1, obj2) => {
   return helper(obj1, obj2);
 };
 
+const uniqueElements = arr => {
+  // TODO: type checking
+  return new Set(arr).size;
+};
+
 module.exports = {
-  deepEquality
+  deepEquality,
+  uniqueElements
 };
