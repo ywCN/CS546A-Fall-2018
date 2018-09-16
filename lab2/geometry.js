@@ -14,10 +14,29 @@ const checkParams = params => {
   }
 };
 
-const volumeOfRectangularPrism = (length, width, height) => {};
-const surfaceAreaOfRectangularPrism = (length, width, height) => {};
-const volumeOfSphere = radius => {};
-const surfaceAreaOfSphere = radius => {};
+const volumeOfRectangularPrism = (length, width, height) => {
+  checkParams([length, width, height]);
+
+  return length * width * height;
+};
+
+const surfaceAreaOfRectangularPrism = (length, width, height) => {
+  checkParams([length, width, height]);
+
+  return 2 * (length * width + width * height + height * length);
+};
+
+const volumeOfSphere = radius => {
+  checkParams([radius]);
+
+  return (4 / 3) * Math.PI * Math.pow(radius, 3);
+};
+
+const surfaceAreaOfSphere = radius => {
+  checkParams([radius]);
+
+  return 4 * Math.PI * Math.pow(radius, 2);
+};
 
 module.exports = {
   volumeOfRectangularPrism,
