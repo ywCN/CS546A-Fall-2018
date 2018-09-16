@@ -45,7 +45,9 @@ const deepEquality = (obj1, obj2) => {
 };
 
 const uniqueElements = arr => {
-  // TODO: type checking
+  if (!Array.isArray(arr)) {
+    throw TypeError('The input must be an Array.');
+  }
   return new Set(arr).size;
 };
 
