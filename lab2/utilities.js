@@ -24,7 +24,7 @@ const deepEquality = (obj1, obj2) => {
       if (
         typeof prop1 === 'object' &&
         typeof prop2 === 'object' &&
-        !deepEquality(prop1, prop2)
+        !helper(prop1, prop2)
       ) {
         return false;
       }
@@ -51,7 +51,10 @@ const uniqueElements = arr => {
   return new Set(arr).size;
 };
 
+const countOfEachCharacterInString = str => {};
+
 module.exports = {
   deepEquality,
-  uniqueElements
+  uniqueElements,
+  countOfEachCharacterInString
 };
