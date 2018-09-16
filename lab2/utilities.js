@@ -1,16 +1,16 @@
 // assume property can only be Object or JS primitive
-export const deepEquality = (obj1, obj2) => {
+const deepEquality = (obj1, obj2) => {
   if (Object.keys(obj1).length !== Object.keys(obj2).length) {
     return false;
   }
 
-  for (const key of obj1Keys) {
+  for (const key of Object.keys(obj1)) {
     if (!obj2.hasOwnProperty(key)) {
       return false;
     }
 
-    const prop1 = obj1.key;
-    const prop2 = obj2.key;
+    const prop1 = obj1[key];
+    const prop2 = obj2[key];
 
     if (
       typeof prop1 === 'object' &&
@@ -26,4 +26,8 @@ export const deepEquality = (obj1, obj2) => {
   }
 
   return true;
+};
+
+module.exports = {
+  deepEquality
 };
