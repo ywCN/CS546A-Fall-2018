@@ -51,7 +51,17 @@ const uniqueElements = arr => {
   return new Set(arr).size;
 };
 
-const countOfEachCharacterInString = str => {};
+const countOfEachCharacterInString = str => {
+  if (typeof str !== 'string') {
+    throw TypeError('The input must be a String.');
+  }
+
+  let charMap = {};
+  for (const char of str) {
+    charMap.char = charMap.char ? charMap.char + 1 : 1;
+  }
+  return charMap;
+};
 
 module.exports = {
   deepEquality,
