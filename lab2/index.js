@@ -24,3 +24,10 @@ console.log(uniqueElements([0])); // 1
 console.log(uniqueElements([1, 2, 2])); // 2
 console.log(uniqueElements([1, 2, '2'])); // 3
 console.log(uniqueElements([undefined, 'undefined', ['yo', 1], { a: 'a' }])); // 4
+
+console.log('----------------countOfEachCharacterInString()----------------');
+console.log(countOfEachCharacterInString('')); // {}
+console.log(countOfEachCharacterInString(' ')); // { ' ': 1 }
+console.log(countOfEachCharacterInString('abcba')); // { a: 2, b: 2, c: 1 }
+console.log(countOfEachCharacterInString('a b c b a')); // { a: 2, ' ': 4, b: 2, c: 1 }
+console.log(countOfEachCharacterInString('Hello, World!')); // { H: 1, e: 1, l: 3, o: 2, ',': 1, ' ': 1, W: 1, r: 1, d: 1, '!': 1 }

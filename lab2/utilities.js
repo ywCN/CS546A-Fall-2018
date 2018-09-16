@@ -58,7 +58,7 @@ const countOfEachCharacterInString = str => {
 
   let charMap = {};
   for (const char of str) {
-    charMap.char = charMap.char ? charMap.char + 1 : 1;
+    charMap[char] = charMap[char] ? charMap[char] + 1 : 1;
   }
   return charMap;
 };
