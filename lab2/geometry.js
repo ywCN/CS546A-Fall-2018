@@ -1,3 +1,4 @@
+// NOTE: I did not round the result because it was not in the lab requirement.
 const checkParams = params => {
   for (const param of params) {
     if (typeof param !== 'number') {
