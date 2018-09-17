@@ -1,7 +1,7 @@
 const checkParams = params => {
   for (const param of params) {
     if (typeof param !== 'number') {
-      throw TypeError(`The param ${param} is not a number.`);
+      throw TypeError(`The type of param ${param} is not a number.`);
     }
     if (param <= 0) {
       throw RangeError(`The param ${param} must be greater than 0.`);
