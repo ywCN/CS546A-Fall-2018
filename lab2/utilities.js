@@ -63,7 +63,7 @@ const uniqueElements = arr => {
 const countOfEachCharacterInString = str => {
   if (typeof str !== 'string') {
     throw TypeError(
-      `The type of input ${str} must be a String, but got ${typeof str}.`
+      `The type of input ${str} should be String, but got ${typeof str}.`
     );
   }
 
