@@ -1,7 +1,14 @@
 // assume property can only be Object or JS primitive
 const deepEquality = (obj1, obj2) => {
-  if (typeof obj1 !== 'object' || typeof obj2 !== 'object') {
-    throw new TypeError('Both inputs must be objects.');
+  if (typeof obj1 !== 'object') {
+    throw new TypeError(
+      `The type of input ${obj1} should be Object, but got ${typeof obj1}.`
+    );
+  }
+  if (typeof obj2 !== 'object') {
+    throw new TypeError(
+      `The type of input ${obj2} should be Object, but got ${typeof obj2}.`
+    );
   }
 
   const helper = (o1, o2) => {
@@ -46,14 +53,18 @@ const deepEquality = (obj1, obj2) => {
 
 const uniqueElements = arr => {
   if (!Array.isArray(arr)) {
-    throw TypeError('The input must be an Array.');
+    throw TypeError(
+      `The type of input ${arr} should be Array, but got ${typeof arr}.`
+    );
   }
   return new Set(arr).size;
 };
 
 const countOfEachCharacterInString = str => {
   if (typeof str !== 'string') {
-    throw TypeError('The input must be a String.');
+    throw TypeError(
+      `The type of input ${str} must be a String, but got ${typeof str}.`
+    );
   }
 
   let charMap = {};

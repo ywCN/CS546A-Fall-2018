@@ -2,7 +2,9 @@
 const checkParams = params => {
   for (const param of params) {
     if (typeof param !== 'number') {
-      throw TypeError(`The type of param ${param} is not a number.`);
+      throw TypeError(
+        `The type of param ${param} should be number, but got ${typeof param}.`
+      );
     }
     if (param <= 0) {
       throw RangeError(`The param ${param} must be greater than 0.`);
@@ -17,25 +19,21 @@ const checkParams = params => {
 
 const volumeOfRectangularPrism = (length, width, height) => {
   checkParams([length, width, height]);
-
   return length * width * height;
 };
 
 const surfaceAreaOfRectangularPrism = (length, width, height) => {
   checkParams([length, width, height]);
-
   return 2 * (length * width + width * height + height * length);
 };
 
 const volumeOfSphere = radius => {
   checkParams([radius]);
-
   return (4 / 3) * Math.PI * Math.pow(radius, 3);
 };
 
 const surfaceAreaOfSphere = radius => {
   checkParams([radius]);
-
   return 4 * Math.PI * Math.pow(radius, 2);
 };
 
