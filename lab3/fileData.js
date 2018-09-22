@@ -2,8 +2,6 @@ const fs = require('fs');
 const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 
-const { createMetrics } = require('./textMetrics');
-
 const getFileAsString = async path => {
   if (typeof path !== 'string') {
     throw TypeError(
@@ -59,11 +57,11 @@ const saveJSONToFile = async (path, obj) => {
 
   if (typeof obj !== 'object') {
     throw TypeError(
-      `The type of ${obj} should be string, but got ${typeof obj}`
+      `The type of ${obj} should be object, but got ${typeof obj}`
     );
   }
 
-  const data = JSON.stringify(createMetrics(obj), null, 2);
+  const data = JSON.stringify(obj, null, 2);
   fs.writeFile(path, data, e => {
     if (e) {
       throw e;

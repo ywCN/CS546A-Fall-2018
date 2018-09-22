@@ -3,6 +3,7 @@ const {
   getFileAsJSON,
   saveJSONToFile
 } = require('./fileData');
+const { createMetrics } = require('./textMetrics');
 
 const fileNames = [
   {
@@ -26,7 +27,8 @@ const main = async () => {
       await getFileAsJSON(fileResultName);
     } catch (e) {
       const fileStr = await getFileAsString(fileName);
-      await saveJSONToFile(fileResultName, fileStr);
+      const metric = createMetrics(fileStr);
+      await saveJSONToFile(fileResultName, metric);
     }
   }
 };
