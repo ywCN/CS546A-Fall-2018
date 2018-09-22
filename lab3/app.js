@@ -27,8 +27,7 @@ const main = async () => {
       await getFileAsJSON(fileResultName);
     } catch (e) {
       const fileStr = await getFileAsString(fileName);
-      const metric = createMetrics(fileStr);
-      await saveJSONToFile(fileResultName, metric);
+      await saveJSONToFile(fileResultName, createMetrics(fileStr));
     }
   }
 };
