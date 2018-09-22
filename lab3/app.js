@@ -24,7 +24,7 @@ const main = async () => {
     // try catch will check if the result file exist
     try {
       await getFileAsJSON(fileResultName);
-    } catch {
+    } catch (e) {
       const fileStr = await getFileAsString(fileName);
       await saveJSONToFile(fileResultName, fileStr);
     }
