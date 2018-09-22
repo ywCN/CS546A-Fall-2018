@@ -10,7 +10,10 @@ const getFileAsString = async path => {
   }
 };
 
-const getFileAsJSON = async path => {};
+const getFileAsJSON = async path => {
+  const result = await readFile(path, 'utf8');
+  console.log(result);
+};
 
 const saveStringToFile = async (path, text) => {};
 

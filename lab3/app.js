@@ -2,7 +2,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 
-const { getFileAsString } = require('./fileData');
+const { getFileAsString, getFileAsJSON } = require('./fileData');
 const { createMetrics } = require('./textMetrics');
 
 const fileNames = [
@@ -23,8 +23,8 @@ const fileNames = [
 const main = async () => {
   for (const { fileName, fileResultName } of fileNames) {
     try {
-      const result = await readFile(fileResultName, 'utf8');
-      console.log(result);
+      // try catch block will check if the result file exist
+      await getFileAsJSON(fileResultName);
     } catch (e) {
       const fileStr = await getFileAsString(fileName);
 
