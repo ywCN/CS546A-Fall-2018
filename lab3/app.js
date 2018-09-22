@@ -1,9 +1,8 @@
-const fs = require('fs');
-const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
-
-const { getFileAsString, getFileAsJSON } = require('./fileData');
-const { createMetrics } = require('./textMetrics');
+const {
+  getFileAsString,
+  getFileAsJSON,
+  saveJSONToFile
+} = require('./fileData');
 
 const fileNames = [
   {
@@ -27,16 +26,7 @@ const main = async () => {
       await getFileAsJSON(fileResultName);
     } catch (e) {
       const fileStr = await getFileAsString(fileName);
-
-      fs.writeFile(
-        fileResultName,
-        JSON.stringify(createMetrics(fileStr), null, 2),
-        e => {
-          if (e) {
-            throw e;
-          }
-        }
-      );
+      await saveJSONToFile(fileResultName, fileStr);
     }
   }
 };
