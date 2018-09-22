@@ -21,8 +21,8 @@ const fileNames = [
 
 const main = async () => {
   for (const { fileName, fileResultName } of fileNames) {
+    // try catch will check if the result file exist
     try {
-      // try catch block will check if the result file exist
       await getFileAsJSON(fileResultName);
     } catch (e) {
       const fileStr = await getFileAsString(fileName);
