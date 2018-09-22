@@ -4,8 +4,7 @@
   "description": "for CS546A lab3",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "node app.test.js"
+    "start": "node app.js"
   },
   "author": "Youhao Wang",
   "license": "ISC"
