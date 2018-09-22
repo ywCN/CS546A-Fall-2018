@@ -27,7 +27,6 @@ const getFileAsJSON = async path => {
   console.log(result);
 };
 
-// not sure the purpose of this function; it is not used in this lab
 const saveStringToFile = async (path, text) => {
   if (typeof path !== 'string') {
     throw TypeError(
@@ -46,6 +45,8 @@ const saveStringToFile = async (path, text) => {
       throw e;
     }
   });
+
+  console.log(text);
 };
 
 const saveJSONToFile = async (path, obj) => {
@@ -61,13 +62,7 @@ const saveJSONToFile = async (path, obj) => {
     );
   }
 
-  const data = JSON.stringify(obj, null, 2);
-  fs.writeFile(path, data, e => {
-    if (e) {
-      throw e;
-    }
-  });
-  console.log(data);
+  await saveStringToFile(path, JSON.stringify(obj, null, 2));
 };
 
 module.exports = {
