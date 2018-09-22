@@ -1,5 +1,11 @@
 // NOTE: I assume the text contains only alphabet letters
 const createMetrics = text => {
+  if (typeof text !== 'string') {
+    throw TypeError(
+      `The type of ${text} should be string, but got ${typeof text}`
+    );
+  }
+
   const regex = new RegExp('[a-z]', 'i');
   const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
 
