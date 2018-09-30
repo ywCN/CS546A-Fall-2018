@@ -1,5 +1,6 @@
 const uuidv4 = require('uuid/v4');
 const { todoItems } = require('./mongoCollections');
+console.log(todoItems);
 
 const validateStringParam = param => {
   if (typeof param !== 'string') {

@@ -4,7 +4,7 @@
   "description": "this is lab3 assignment for CS545A in fall 2018",
   "main": "app.js",
   "scripts": {
-    "start": "app.js"
+    "start": "node app.js"
   },
   "author": "Youhao Wang",
   "license": "ISC",
