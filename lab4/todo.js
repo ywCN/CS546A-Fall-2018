@@ -1,6 +1,5 @@
 const uuidv4 = require('uuid/v4');
 const { todoItems } = require('./mongoCollections');
-console.log(todoItems);
 
 const validateStringParam = param => {
   if (typeof param !== 'string') {
@@ -33,8 +32,8 @@ const createTask = async (title, description) => {
 
 const getAllTasks = async () => {
   const todoItemCollection = await todoItems();
-  const todoItems = await todoItemCollection.find({}).toArray();
-  return todoItems;
+  const allTasks = await todoItemCollection.find({}).toArray();
+  return allTasks;
 };
 
 const getTask = async id => {
