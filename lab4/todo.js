@@ -1,7 +1,7 @@
 const uuidv4 = require('uuid/v4');
 const todoItems = require('./mongoCollections').todoItems;
 
-const stringValidator = param => {
+const validateStringParam = param => {
   if (typeof param !== 'string') {
     throw TypeError(
       `The type of ${param} should be string, but got ${typeof param}.`
@@ -9,15 +9,24 @@ const stringValidator = param => {
   }
 };
 
-const createTask = async (title, description) => {};
+const createTask = async (title, description) => {
+  validateStringParam(title);
+  validateStringParam(description);
+};
 
 const getAllTasks = async () => {};
 
-const getTask = async id => {};
+const getTask = async id => {
+  validateStringParam(id);
+};
 
-const completeTask = async taskId => {};
+const completeTask = async taskId => {
+  validateStringParam(taskId);
+};
 
-const removeTask = async id => {};
+const removeTask = async id => {
+  validateStringParam(id);
+};
 
 module.exports = {
   createTask,
