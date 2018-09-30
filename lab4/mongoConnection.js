@@ -1,4 +1,4 @@
-// NOTE: for brew installed mongodb, use the command below
+// NOTE: for brew installed mongodb, use the command below to run mongodb locally
 // mongod --dbpath /usr/local/var/mongodb
 const MongoClient = require('mongodb').MongoClient;
 
