@@ -26,6 +26,8 @@ const createTask = async (title, description) => {
   if (insertInfo.insertedCount === 0) {
     throw 'Could not create new task.';
   }
+
+  return newTodoItem;
 };
 
 const getAllTasks = async () => {
