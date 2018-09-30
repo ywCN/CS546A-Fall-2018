@@ -1,0 +1,14 @@
+{
+  "name": "lab4",
+  "version": "1.0.0",
+  "description": "this is lab3 assignment for CS545A in fall 2018",
+  "main": "app.js",
+  "scripts": {
+    "start": "app.js"
+  },
+  "author": "Youhao Wang",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.1.6"
+  }
+}
