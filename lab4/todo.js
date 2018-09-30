@@ -49,14 +49,13 @@ const completeTask = async id => {
   validateStringParam(id);
 
   const todoItemCollection = await todoItems();
-
-  const updateInfo = await todoItemCollection.updateOne(
-    { _id: id },
-    {
-      completed: true,
-      completedAt: new Date()
-    }
-  );
+  const oldTask = await getTask(id);
+  const newTask = {
+    ...oldTask,
+    completed: true,
+    completedAt: new Date()
+  };
+  const updateInfo = await todoItemCollection.updateOne({ _id: id }, newTask);
   if (updateInfo.modifiedCount === 0) {
     throw `Unable to complete the task with id of ${id}.`;
   }
