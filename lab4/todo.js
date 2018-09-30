@@ -79,7 +79,6 @@ const removeTask = async id => {
 module.exports = {
   createTask,
   getAllTasks,
-  getTask,
   completeTask,
   removeTask
 };

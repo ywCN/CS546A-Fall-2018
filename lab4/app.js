@@ -1,10 +1,10 @@
 const {
   createTask,
   getAllTasks,
-  getTask,
   completeTask,
   removeTask
 } = require('./todo.js');
+const connection = require('./mongoConnection');
 
 const main = async () => {
   const task1 = await createTask(
@@ -26,6 +26,15 @@ const main = async () => {
     const completed = await completeTask(task._id);
     console.log(completed, '\n is completed.');
   }
+
+  const db = await connection();
+  await db.serverConfig.close();
+
+  console.log('Done.');
 };
 
-main();
+try {
+  await main();
+} catch (e) {
+  throw e;
+}
