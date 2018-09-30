@@ -34,7 +34,7 @@ const main = async () => {
 };
 
 try {
-  await main();
+  main();
 } catch (e) {
   throw e;
 }
