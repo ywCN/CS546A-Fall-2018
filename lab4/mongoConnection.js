@@ -1,8 +1,10 @@
+// NOTE: for brew installed mongodb, use the command below
+// mongod --dbpath /usr/local/var/mongodb
 const MongoClient = require('mongodb').MongoClient;
 
 const mongoConfig = {
   serverUrl: 'mongodb://localhost:27017/',
-  database: 'dogsWithBlogs'
+  database: 'FirstName_LastName_lab4'
 };
 
 let _connection = undefined;
