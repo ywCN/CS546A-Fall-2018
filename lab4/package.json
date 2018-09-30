@@ -9,6 +9,7 @@
   "author": "Youhao Wang",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^3.1.6"
+    "mongodb": "^3.1.6",
+    "uuid": "^3.3.2"
   }
 }
