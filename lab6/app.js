@@ -1,4 +1,5 @@
 const express = require('express');
+const app = express();
 
 const aboutRoute = require('./aboutRoute');
 const storyRoute = require('./storyRoute');
@@ -14,11 +15,10 @@ const routeConfig = app => {
   });
 };
 
-const app = express();
 routeConfig(app);
-app.listen(3000, () => {
+app.listen(3000, () =>
   console.log(
     'Listening to port 3000. You may open http://localhost:3000 in your browser.',
     "\nNote: This lab only has 3 developed routes. Please try '/about', '/story', or '/education' route."
-  );
-});
+  )
+);
