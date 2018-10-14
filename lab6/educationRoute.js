@@ -4,10 +4,16 @@ router.get('/', async (req, res) => {
   try {
     res.json([
       {
-        schoolName: 'First School Name',
-        degree: 'First School Degree',
-        favoriteClass: 'Favorite class in school',
-        favoriteMemory: 'A memorable memory from your time in that school'
+        schoolName: 'Cooking School',
+        degree: 'Chef',
+        favoriteClass: 'Chicken',
+        favoriteMemory: 'I ate the chicken I cooked.'
+      },
+      {
+        schoolName: 'Coding School',
+        degree: 'Coder',
+        favoriteClass: 'LeetCode',
+        favoriteMemory: 'Dynamic Programming'
       }
     ]);
   } catch (e) {
