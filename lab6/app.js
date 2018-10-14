@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 
-const about = require('./aboutRoute');
-const story = require('./storyRoute');
-const education = require('./educationRoute');
+const aboutRoute = require('./aboutRoute');
+const storyRoute = require('./storyRoute');
+const educationRoute = require('./educationRoute');
 
 const routeConfig = app => {
   app.use('/about', aboutRoute);
