@@ -1,0 +1,14 @@
+{
+  "name": "lab6",
+  "version": "1.0.0",
+  "description": "This is for CS546 lab6 in fall 2018.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Youhao Wang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
