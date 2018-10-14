@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
 
 const aboutRoute = require('./aboutRoute');
 const storyRoute = require('./storyRoute');
