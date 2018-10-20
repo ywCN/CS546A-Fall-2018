@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { getAllRecipes, createRecipe } = require('./recipe');
 
 // GET Responds with the full content of the specified recipe ID
 router.get('/:id', async (req, res) => {

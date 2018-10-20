@@ -22,3 +22,8 @@ const createRecipe = async data => {
   }
   return newRecipe;
 };
+
+module.exports = {
+  getAllRecipes,
+  createRecipe
+};
