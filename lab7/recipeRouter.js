@@ -25,19 +25,18 @@ router.get('/:id', async (req, res) => {
     const recipe = await getRecipe(req.params.id);
     res.json(recipe);
   } catch (e) {
-    res
-      .status(500)
-      .json({
-        error: `Unable to find the recipe with the id ${req.params.id}`
-      });
+    res.status(500).json({
+      error: `Unable to find the recipe with the id ${req.params.id}`
+    });
   }
 });
 
 // PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
 router.put('/:id', async (req, res) => {
   try {
-    validateAllFieldsForReplace(req.body);
+    validateAllFields(req.body);
   } catch (e) {
+    console.log(e);
     res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
   }
 
@@ -45,34 +44,10 @@ router.put('/:id', async (req, res) => {
     const updatedRecipe = await updateRecipe(req.params.id, req.body);
     res.json(updatedRecipe);
   } catch (e) {
+    console.log(e);
     res.status(500).send();
   }
 });
-
-// I assume values of 'ingredients' and 'steps' can be empty arrays.
-// All field keys must exist.
-const validateAllFieldsForReplace = obj => {
-  if (typeof obj !== 'object') throw `Input is not object.`;
-
-  const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
-  const objKeys = new Set(Object.keys(obj));
-
-  for (const key of objKeys) {
-    if (!expectedKeys.delete(key)) {
-      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
-    }
-  }
-
-  if (
-    expectedKeys.size === 0 &&
-    Array.isArray(obj.ingredients) &&
-    Array.isArray(obj.steps)
-  ) {
-    return;
-  }
-
-  throw `The input object ${obj} is not valid.`;
-};
 
 // PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
 router.patch('/:id', async (req, res) => {
@@ -86,6 +61,7 @@ router.patch('/:id', async (req, res) => {
     const updatedRecipe = await updateRecipe(req.params.id, req.body);
     res.json(updatedRecipe);
   } catch (e) {
+    console.log(e);
     res.status(500).send();
   }
 });
@@ -93,7 +69,7 @@ router.patch('/:id', async (req, res) => {
 const minimalOneFieldExist = obj => {
   if (typeof obj !== 'object') throw `Input is not object.`;
 
-  const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
+  const expectedKeys = new Set(['title', 'ingredients', 'steps']);
   const objKeys = new Set(Object.keys(obj));
 
   for (const key of objKeys) {
@@ -110,7 +86,7 @@ const minimalOneFieldExist = obj => {
     throw `steps field is not an array`;
   }
 
-  if (expectedKeys.size === 4) {
+  if (expectedKeys.size === 3) {
     throw `The input object ${obj} does not have any expected field.`;
   }
 };
@@ -142,7 +118,7 @@ const deleteAllEntries = entries => {};
 // POST Creates a recipe with the supplied data in the request body, and returns the new recipe
 router.post('/', async (req, res) => {
   try {
-    validateAllFieldsForCreate(req.body);
+    validateAllFields(req.body);
   } catch (e) {
     res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
   }
@@ -157,7 +133,7 @@ router.post('/', async (req, res) => {
 
 // I assume values of 'ingredients' and 'steps' can be empty arrays.
 // All field keys must exist.
-const validateAllFieldsForCreate = obj => {
+const validateAllFields = obj => {
   if (typeof obj !== 'object') throw `Input is not object.`;
 
   const expectedKeys = new Set(['title', 'ingredients', 'steps']);
