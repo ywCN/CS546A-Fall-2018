@@ -7,19 +7,6 @@ const {
   deleteRecipe
 } = require('./recipe');
 
-// TODO: rm this obj before submitting homework
-// const test = {
-//   "_id": 'A uuid',
-//   "title": 'Recipe title',
-//   "ingredients": [
-//     {
-//       "name": 'Ingredient name',
-//       "amount": 'portion amount'
-//     }
-//   ],
-//   "steps": ['First step', 'Second step', 'Third step']
-// };
-
 // GET Responds with the full content of the specified recipe ID
 router.get('/:id', async (req, res) => {
   try {
@@ -37,7 +24,6 @@ router.put('/:id', async (req, res) => {
   try {
     validateAllFields(req.body);
   } catch (e) {
-    console.log(e);
     res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
   }
 
@@ -45,8 +31,7 @@ router.put('/:id', async (req, res) => {
     const updatedRecipe = await updateRecipe(req.params.id, req.body);
     res.json(updatedRecipe);
   } catch (e) {
-    console.log(e);
-    res.status(500).send();
+    res.status(500).json(e);
   }
 });
 
@@ -62,8 +47,7 @@ router.patch('/:id', async (req, res) => {
     const updatedRecipe = await updateRecipe(req.params.id, req.body);
     res.json(updatedRecipe);
   } catch (e) {
-    console.log(e);
-    res.status(500).send();
+    res.status(500).json(e);
   }
 });
 
@@ -98,7 +82,7 @@ router.delete('/:id', async (req, res) => {
     await deleteRecipe(req.params.id);
     res.json({ status: 'recipe deleted' });
   } catch (e) {
-    res.status(500).send();
+    res.status(500).json(e);
   }
 });
 
@@ -108,7 +92,7 @@ router.get('/', async (req, res) => {
     const allRecipes = await getAllRecipes();
     res.json(allRecipes);
   } catch (e) {
-    res.status(500).send();
+    res.status(500).json(e);
   }
 });
 
@@ -128,7 +112,7 @@ router.post('/', async (req, res) => {
     const newRecipe = await createRecipe(req.body);
     res.json(newRecipe);
   } catch (e) {
-    res.status(500).send();
+    res.status(500).json(e);
   }
 });
 
