@@ -9,13 +9,14 @@ const routeConfig = app => {
     res.status(404).send({ error: 'Route Not Found' });
   });
 };
+
 const app = express();
+
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
 app.use(bodyParser.json());
-
 routeConfig(app);
 app.listen(3000, () => console.log('Listening to port 3000.'));
