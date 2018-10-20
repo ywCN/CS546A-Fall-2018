@@ -17,7 +17,7 @@ router.put('/:id', async (req, res) => {
   try {
     validateAllFields(req.body);
   } catch (e) {
-    res.status(400).json({ error: 'Input is not valid.', input: req.body });
+    res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
   }
   // NOTE: req.body needs to have all fields
   // use mutiple try catch blocks to do checking
@@ -32,7 +32,9 @@ router.put('/:id', async (req, res) => {
 // I assume values of 'ingredients' and 'steps' can be empty arrays.
 // All field keys must exist.
 const validateAllFields = obj => {
-  const expectedKeys = new Set(['title', 'ingredients', 'steps']);
+  if (typeof obj !== 'object') throw `Input is not object.`;
+
+  const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
   const objKeys = new Set(obj.keys());
 
   for (const key of objKeys) {
@@ -57,12 +59,43 @@ router.patch('/:id', async (req, res) => {
   // NOTE: req.body needs to have minimal 1 field
   // use mutiple try catch blocks to do checking
   try {
+    minimalOneFieldExist(req.body);
+  } catch (e) {
+    res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
+  }
+
+  try {
     res.json(req.body);
     // res.json() does status 200 automatically
   } catch (e) {
     res.status(500).send();
   }
 });
+
+const minimalOneFieldExist = obj => {
+  if (typeof obj !== 'object') throw `Input is not object.`;
+
+  const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
+  const objKeys = new Set(obj.keys());
+
+  for (const key of objKeys) {
+    if (!expectedKeys.delete(key)) {
+      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
+    }
+  }
+
+  if (obj.hasOwnProperty('ingredients') && !Array.isArray(obj.ingredients)) {
+    throw `ingredients field is not an array`;
+  }
+
+  if (obj.hasOwnProperty('steps') && !Array.isArray(obj.steps)) {
+    throw `steps field is not an array`;
+  }
+
+  if (expectedKeys.size() === 4) {
+    throw `The input object ${obj} does not have any expected field.`;
+  }
+};
 
 // DELETE Deletes the recipe and returns nothing.
 router.delete('/:id', async (req, res) => {
