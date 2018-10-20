@@ -23,7 +23,33 @@ const getAllRecipes = async () => {
   return allRecipes;
 };
 
+const getRecipe = async id => {
+  const recipes = await lab7recipes();
+  const recipe = await recipes.findOne({ _id: id });
+  if (recipe === null) {
+    throw `Unable to find task with id of ${id}.`;
+  }
+  return recipe;
+};
+
+const updateRecipe = async (id, fields) => {
+  const recipes = await lab7recipes();
+  const updateInfo = await recipes.updateOne(
+    { _id: id },
+    {
+      $set: fields
+    }
+  );
+  if (updateInfo.modifiedCount === 0) {
+    throw `Unable to complete the task with id of ${id}.`;
+  }
+
+  return await getRecipe(id);
+};
+
 module.exports = {
   getAllRecipes,
-  createRecipe
+  createRecipe,
+  getRecipe,
+  updateRecipe
 };

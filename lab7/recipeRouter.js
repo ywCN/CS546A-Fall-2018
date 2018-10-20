@@ -1,5 +1,10 @@
 const router = require('express').Router();
-const { getAllRecipes, createRecipe } = require('./recipe');
+const {
+  getAllRecipes,
+  createRecipe,
+  getRecipe,
+  updateRecipe
+} = require('./recipe');
 
 // TODO: rm this obj before submitting homework
 // const test = {
@@ -16,12 +21,15 @@ const { getAllRecipes, createRecipe } = require('./recipe');
 
 // GET Responds with the full content of the specified recipe ID
 router.get('/:id', async (req, res) => {
-  // use mutiple try catch blocks to do checking
   try {
-    res.json({ hello: 'hi' });
-    // res.json() does status 200 automatically
+    const recipe = await getRecipe(req.params.id);
+    res.json(recipe);
   } catch (e) {
-    res.status(500).send();
+    res
+      .status(500)
+      .json({
+        error: `Unable to find the recipe with the id ${req.params.id}`
+      });
   }
 });
 
@@ -34,8 +42,8 @@ router.put('/:id', async (req, res) => {
   }
 
   try {
-    res.json(req.body);
-    // res.json() does status 200 automatically
+    const updatedRecipe = await updateRecipe(req.params.id, req.body);
+    res.json(updatedRecipe);
   } catch (e) {
     res.status(500).send();
   }
@@ -68,8 +76,6 @@ const validateAllFieldsForReplace = obj => {
 
 // PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
 router.patch('/:id', async (req, res) => {
-  // NOTE: req.body needs to have minimal 1 field
-  // use mutiple try catch blocks to do checking
   try {
     minimalOneFieldExist(req.body);
   } catch (e) {
@@ -77,8 +83,8 @@ router.patch('/:id', async (req, res) => {
   }
 
   try {
-    res.json(req.body);
-    // res.json() does status 200 automatically
+    const updatedRecipe = await updateRecipe(req.params.id, req.body);
+    res.json(updatedRecipe);
   } catch (e) {
     res.status(500).send();
   }
