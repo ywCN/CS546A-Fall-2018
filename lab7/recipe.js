@@ -1,14 +1,11 @@
 const { lab7recipes } = require('./mongoCollections');
 const uuidv4 = require('uuid/v4');
 
-// NOTE: no try catch in this file
-// TODO: build CRUD functions
-
-const createRecipe = async data => {
+const createRecipe = async fields => {
   const recipes = await lab7recipes();
   const newRecipe = {
     _id: uuidv4(),
-    ...data
+    ...fields
   };
   const insertInfo = await recipes.insertOne(newRecipe);
   if (insertInfo.insertedCount === 0) {
@@ -43,14 +40,12 @@ const updateRecipe = async (id, fields) => {
   if (updateInfo.modifiedCount === 0) {
     throw `Unable to update the recipe with id of ${id}.`;
   }
-
   return await getRecipe(id);
 };
 
 const deleteRecipe = async id => {
   const recipes = await lab7recipes();
   const deleteInfo = await recipes.removeOne({ _id: id });
-
   if (deleteInfo.deletedCount === 0) {
     throw `Unable to remove recipe with id of ${id}.`;
   }
