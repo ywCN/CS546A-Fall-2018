@@ -17,7 +17,7 @@ router.put('/:id', async (req, res) => {
   try {
     validateAllFields(req.body);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send('Input is not valid.');
   }
   // NOTE: req.body needs to have all fields
   // use mutiple try catch blocks to do checking
