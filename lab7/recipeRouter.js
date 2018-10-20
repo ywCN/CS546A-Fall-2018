@@ -1,6 +1,19 @@
 const router = require('express').Router();
 const { getAllRecipes, createRecipe } = require('./recipe');
 
+// TODO: rm this obj before submitting homework
+// const test = {
+//   "_id": 'A uuid',
+//   "title": 'Recipe title',
+//   "ingredients": [
+//     {
+//       "name": 'Ingredient name',
+//       "amount": 'portion amount'
+//     }
+//   ],
+//   "steps": ['First step', 'Second step', 'Third step']
+// };
+
 // GET Responds with the full content of the specified recipe ID
 router.get('/:id', async (req, res) => {
   // use mutiple try catch blocks to do checking
