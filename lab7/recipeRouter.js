@@ -30,7 +30,6 @@ router.put('/:id', async (req, res) => {
   try {
     validateAllFieldsForReplace(req.body);
   } catch (e) {
-    console.log(e);
     res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
   }
 
@@ -134,13 +133,42 @@ router.get('/', async (req, res) => {
 // POST Creates a recipe with the supplied data in the request body, and returns the new recipe
 router.post('/', async (req, res) => {
   try {
-    res.json(req.body);
+    validateAllFieldsForCreate(req.body);
+  } catch (e) {
+    res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
+  }
+
+  try {
     const newRecipe = await createRecipe(req.body);
     res.json(newRecipe);
   } catch (e) {
     res.status(500).send();
   }
-  res.json({ status: 'create one recipe succeed!' });
 });
+
+// I assume values of 'ingredients' and 'steps' can be empty arrays.
+// All field keys must exist.
+const validateAllFieldsForCreate = obj => {
+  if (typeof obj !== 'object') throw `Input is not object.`;
+
+  const expectedKeys = new Set(['title', 'ingredients', 'steps']);
+  const objKeys = new Set(Object.keys(obj));
+
+  for (const key of objKeys) {
+    if (!expectedKeys.delete(key)) {
+      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
+    }
+  }
+
+  if (
+    expectedKeys.size === 0 &&
+    Array.isArray(obj.ingredients) &&
+    Array.isArray(obj.steps)
+  ) {
+    return;
+  }
+
+  throw `The input object ${obj} is not valid.`;
+};
 
 module.exports = router;
