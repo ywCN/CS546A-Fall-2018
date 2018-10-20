@@ -13,6 +13,7 @@ router.get('/:id', async (req, res) => {
 
 // PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
 router.put('/:id', async (req, res) => {
+  // NOTE: req.body needs to have all fields
   // use mutiple try catch blocks to do checking
   try {
     res.json(req.body);
@@ -24,6 +25,7 @@ router.put('/:id', async (req, res) => {
 
 // PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
 router.patch('/:id', async (req, res) => {
+  // NOTE: req.body needs to have minimal 1 field
   // use mutiple try catch blocks to do checking
   try {
     res.json(req.body);
