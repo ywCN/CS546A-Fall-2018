@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 // PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
 router.put('/:id', async (req, res) => {
   try {
-    validateAllFields(req.body);
+    validateAllFieldsForReplace(req.body);
   } catch (e) {
     console.log(e);
     res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
 
 // I assume values of 'ingredients' and 'steps' can be empty arrays.
 // All field keys must exist.
-const validateAllFields = obj => {
+const validateAllFieldsForReplace = obj => {
   if (typeof obj !== 'object') throw `Input is not object.`;
 
   const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
@@ -123,8 +123,8 @@ router.delete('/:id', async (req, res) => {
 // GET Responds with an array of all recipes in the format of {_id: RECIPE_ID, title: RECIPE_TITLE}
 router.get('/', async (req, res) => {
   try {
-    // const allRecipes = await getAllRecipes();
-    // return allRecipes;
+    const allRecipes = await getAllRecipes();
+    res.json(allRecipes);
   } catch (e) {
     res.status(500).send();
   }
@@ -135,8 +135,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     res.json(req.body);
-    // const newRecipe = await createRecipe(req.body);
-    // res.json(newRecipe);
+    const newRecipe = await createRecipe(req.body);
+    res.json(newRecipe);
   } catch (e) {
     res.status(500).send();
   }
