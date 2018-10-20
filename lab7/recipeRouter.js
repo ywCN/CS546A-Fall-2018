@@ -14,6 +14,11 @@ router.get('/:id', async (req, res) => {
 
 // PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
 router.put('/:id', async (req, res) => {
+  try {
+    validateAllFields(req.body);
+  } catch (e) {
+    res.status(400).send(e);
+  }
   // NOTE: req.body needs to have all fields
   // use mutiple try catch blocks to do checking
   try {
@@ -23,6 +28,26 @@ router.put('/:id', async (req, res) => {
     res.status(500).send();
   }
 });
+
+// I assume values of 'ingredients' and 'steps' can be empty arrays.
+// All field keys must exist.
+const validateAllFields = obj => {
+  const expectedKeys = new Set(['title', 'ingredients', 'steps']);
+  const objKeys = new Set(obj.keys());
+  for (const key of objKeys) {
+    if (!expectedKeys.delete(key)) {
+      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
+    }
+  }
+  if (
+    expectedKeys.size() === 0 &&
+    Array.isArray(obj.ingredients) &&
+    Array.isArray(obj.steps)
+  ) {
+    return;
+  }
+  throw `The input object ${obj} is not valid.`;
+};
 
 // PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
 router.patch('/:id', async (req, res) => {
