@@ -127,8 +127,11 @@ router.get('/', async (req, res) => {
   } catch (e) {
     res.status(500).send();
   }
-  res.json({ status: 'get all recipes succeed!' });
 });
+
+// TODO: create a delete all entries block
+// TODO: delete this function before submitting
+const deleteAllEntries = entries => {};
 
 // POST Creates a recipe with the supplied data in the request body, and returns the new recipe
 router.post('/', async (req, res) => {
