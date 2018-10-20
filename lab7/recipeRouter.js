@@ -14,11 +14,7 @@ router.get('/:id', async (req, res) => {
 
 // PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
 router.put('/:id', async (req, res) => {
-  try {
-    validateAllFields(req.body);
-  } catch (e) {
-    res.status(400).send('Input is not valid.');
-  }
+  validateAllFields(req.body);
   // NOTE: req.body needs to have all fields
   // use mutiple try catch blocks to do checking
   try {
@@ -34,11 +30,13 @@ router.put('/:id', async (req, res) => {
 const validateAllFields = obj => {
   const expectedKeys = new Set(['title', 'ingredients', 'steps']);
   const objKeys = new Set(obj.keys());
+
   for (const key of objKeys) {
     if (!expectedKeys.delete(key)) {
-      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
+      res.status(400).send('Input object is not valid.');
     }
   }
+
   if (
     expectedKeys.size() === 0 &&
     Array.isArray(obj.ingredients) &&
@@ -46,7 +44,8 @@ const validateAllFields = obj => {
   ) {
     return;
   }
-  throw `The input object ${obj} is not valid.`;
+
+  res.status(400).send('Input object is not valid.');
 };
 
 // PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
