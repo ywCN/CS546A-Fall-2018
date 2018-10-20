@@ -3,7 +3,8 @@ const {
   getAllRecipes,
   createRecipe,
   getRecipe,
-  updateRecipe
+  updateRecipe,
+  deleteRecipe
 } = require('./recipe');
 
 // TODO: rm this obj before submitting homework
@@ -94,8 +95,8 @@ const minimalOneFieldExist = obj => {
 // DELETE Deletes the recipe and returns nothing.
 router.delete('/:id', async (req, res) => {
   try {
-    res.json(req.body);
-    // res.json() does status 200 automatically
+    await deleteRecipe(req.params.id);
+    res.json({ status: 'recipe deleted' });
   } catch (e) {
     res.status(500).send();
   }
