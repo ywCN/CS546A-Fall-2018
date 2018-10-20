@@ -1,0 +1,69 @@
+const router = require('express').Router();
+
+// GET Responds with the full content of the specified recipe ID
+router.get('/:id', async (req, res) => {
+  // use mutiple try catch blocks to do checking
+  try {
+    res.json({ hello: 'hi' });
+    // res.json() does status 200 automatically
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+// PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
+router.put('/:id', async (req, res) => {
+  // use mutiple try catch blocks to do checking
+  try {
+    res.json(req.body);
+    // res.json() does status 200 automatically
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+// PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
+router.patch('/:id', async (req, res) => {
+  // use mutiple try catch blocks to do checking
+  try {
+    res.json(req.body);
+    // res.json() does status 200 automatically
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+// DELETE Deletes the recipe and returns nothing.
+router.delete('/:id', async (req, res) => {
+  try {
+    res.json(req.body);
+    // res.json() does status 200 automatically
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+// GET Responds with an array of all recipes in the format of {_id: RECIPE_ID, title: RECIPE_TITLE}
+router.get('/', async (req, res) => {
+  try {
+    // const allRecipes = await getAllRecipes();
+    // return allRecipes;
+  } catch (e) {
+    res.status(500).send();
+  }
+  res.json({ status: 'get all recipes succeed!' });
+});
+
+// POST Creates a recipe with the supplied data in the request body, and returns the new recipe
+router.post('/', async (req, res) => {
+  try {
+    res.json(req.body);
+    // const newRecipe = await createRecipe(req.body);
+    // res.json(newRecipe);
+  } catch (e) {
+    res.status(500).send();
+  }
+  res.json({ status: 'create one recipe succeed!' });
+});
+
+module.exports = router;
