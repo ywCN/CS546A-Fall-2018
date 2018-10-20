@@ -17,10 +17,10 @@ router.put('/:id', async (req, res) => {
   try {
     validateAllFields(req.body);
   } catch (e) {
+    console.log(e);
     res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
   }
-  // NOTE: req.body needs to have all fields
-  // use mutiple try catch blocks to do checking
+
   try {
     res.json(req.body);
     // res.json() does status 200 automatically
@@ -35,7 +35,7 @@ const validateAllFields = obj => {
   if (typeof obj !== 'object') throw `Input is not object.`;
 
   const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
-  const objKeys = new Set(obj.keys());
+  const objKeys = new Set(Object.keys(obj));
 
   for (const key of objKeys) {
     if (!expectedKeys.delete(key)) {
@@ -44,7 +44,7 @@ const validateAllFields = obj => {
   }
 
   if (
-    expectedKeys.size() === 0 &&
+    expectedKeys.size === 0 &&
     Array.isArray(obj.ingredients) &&
     Array.isArray(obj.steps)
   ) {
@@ -76,7 +76,7 @@ const minimalOneFieldExist = obj => {
   if (typeof obj !== 'object') throw `Input is not object.`;
 
   const expectedKeys = new Set(['_id', 'title', 'ingredients', 'steps']);
-  const objKeys = new Set(obj.keys());
+  const objKeys = new Set(Object.keys(obj));
 
   for (const key of objKeys) {
     if (!expectedKeys.delete(key)) {
@@ -92,7 +92,7 @@ const minimalOneFieldExist = obj => {
     throw `steps field is not an array`;
   }
 
-  if (expectedKeys.size() === 4) {
+  if (expectedKeys.size === 4) {
     throw `The input object ${obj} does not have any expected field.`;
   }
 };
