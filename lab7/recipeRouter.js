@@ -33,43 +33,42 @@ router.put('/:id', async (req, res) => {
 
 // PATCH Updates the specified recipe with only the supplied changes, and returns the updated recipe
 router.patch('/:id', async (req, res) => {
-  try {
-    minimalOneFieldExist(req.body);
-  } catch (e) {
-    res.status(400).json({ error: e });
-  }
-
-  try {
-    const updatedRecipe = await updateRecipe(req.params.id, req.body);
-    res.json(updatedRecipe);
-  } catch (e) {
-    res.status(500).json({ error: e });
+  if (minimalOneFieldExist(req.body)) {
+    try {
+      const updatedRecipe = await updateRecipe(req.params.id, req.body);
+      res.json(updatedRecipe);
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  } else {
+    res.status(400).json({ error: 'Input is not valid', badInput: req.body });
   }
 });
 
 const minimalOneFieldExist = obj => {
-  if (typeof obj !== 'object') throw `Input is not object.`;
+  if (typeof obj !== 'object') return false;
 
   const expectedKeys = new Set(['title', 'ingredients', 'steps']);
   const objKeys = new Set(Object.keys(obj));
 
   for (const key of objKeys) {
     if (!expectedKeys.delete(key)) {
-      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
+      return false;
     }
   }
 
   if (obj.hasOwnProperty('ingredients') && !Array.isArray(obj.ingredients)) {
-    throw `ingredients field is not an array`;
+    return false;
   }
 
   if (obj.hasOwnProperty('steps') && !Array.isArray(obj.steps)) {
-    throw `steps field is not an array`;
+    return false;
   }
 
   if (expectedKeys.size === 3) {
-    throw `The input object ${obj} does not have any expected field.`;
+    return false;
   }
+  return true;
 };
 
 // DELETE Deletes the recipe and returns nothing.
