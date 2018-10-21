@@ -13,7 +13,6 @@ const getCollectionFn = collection => {
   };
 };
 
-// lab7-recipes is not an valid variable name
 module.exports = {
   lab7recipes: getCollectionFn('lab7-recipes')
 };

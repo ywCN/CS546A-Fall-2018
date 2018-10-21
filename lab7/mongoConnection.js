@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const mongoConfig = {
   serverUrl: 'mongodb://localhost:27017/',
-  database: 'Youhao_Wang_lab4'
+  database: 'lab7-recipes'
 };
 
 let _connection = undefined;
