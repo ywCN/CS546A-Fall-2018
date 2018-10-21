@@ -13,9 +13,7 @@ router.get('/:id', async (req, res) => {
     const recipe = await getRecipe(req.params.id);
     res.json(recipe);
   } catch (e) {
-    res.status(500).json({
-      error: `Unable to find the recipe with the id ${req.params.id}`
-    });
+    res.status(500).json({ error: e });
   }
 });
 
@@ -24,14 +22,14 @@ router.put('/:id', async (req, res) => {
   try {
     validateAllFields(req.body);
   } catch (e) {
-    res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
+    res.status(400).json({ error: e });
   }
 
   try {
     const updatedRecipe = await updateRecipe(req.params.id, req.body);
     res.json(updatedRecipe);
   } catch (e) {
-    res.status(500).json(e);
+    res.status(500).json({ error: e });
   }
 });
 
@@ -40,14 +38,14 @@ router.patch('/:id', async (req, res) => {
   try {
     minimalOneFieldExist(req.body);
   } catch (e) {
-    res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
+    res.status(400).json({ error: e });
   }
 
   try {
     const updatedRecipe = await updateRecipe(req.params.id, req.body);
     res.json(updatedRecipe);
   } catch (e) {
-    res.status(500).json(e);
+    res.status(500).json({ error: e });
   }
 });
 
@@ -82,7 +80,7 @@ router.delete('/:id', async (req, res) => {
     await deleteRecipe(req.params.id);
     res.json({ status: 'recipe deleted' });
   } catch (e) {
-    res.status(500).json(e);
+    res.status(500).json({ error: e });
   }
 });
 
@@ -92,7 +90,7 @@ router.get('/', async (req, res) => {
     const allRecipes = await getAllRecipes();
     res.json(allRecipes);
   } catch (e) {
-    res.status(500).json(e);
+    res.status(500).json({ error: e });
   }
 });
 
@@ -105,14 +103,14 @@ router.post('/', async (req, res) => {
   try {
     validateAllFields(req.body);
   } catch (e) {
-    res.status(400).json({ error: 'Input is not valid.', badInput: req.body });
+    res.status(400).json({ error: e });
   }
 
   try {
     const newRecipe = await createRecipe(req.body);
     res.json(newRecipe);
   } catch (e) {
-    res.status(500).json(e);
+    res.status(500).json({ error: e });
   }
 });
 
