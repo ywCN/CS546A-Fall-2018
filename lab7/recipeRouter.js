@@ -19,17 +19,15 @@ router.get('/:id', async (req, res) => {
 
 // PUT Updates the specified recipe with by replacing the recipe with the new recipe content, and returns the updated recipe
 router.put('/:id', async (req, res) => {
-  try {
-    validateAllFields(req.body);
-  } catch (e) {
-    res.status(400).json({ error: e });
-  }
-
-  try {
-    const updatedRecipe = await updateRecipe(req.params.id, req.body);
-    res.json(updatedRecipe);
-  } catch (e) {
-    res.status(500).json({ error: e });
+  if (validateAllFields(req.body)) {
+    try {
+      const updatedRecipe = await updateRecipe(req.params.id, req.body);
+      res.json(updatedRecipe);
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  } else {
+    res.status(400).json({ error: 'Input is not valid', badInput: req.body });
   }
 });
 
@@ -94,37 +92,31 @@ router.get('/', async (req, res) => {
   }
 });
 
-// TODO: create a delete all entries block
-// TODO: delete this function before submitting
-const deleteAllEntries = entries => {};
-
 // POST Creates a recipe with the supplied data in the request body, and returns the new recipe
 router.post('/', async (req, res) => {
-  try {
-    validateAllFields(req.body);
-  } catch (e) {
-    res.status(400).json({ error: e });
-  }
-
-  try {
-    const newRecipe = await createRecipe(req.body);
-    res.json(newRecipe);
-  } catch (e) {
-    res.status(500).json({ error: e });
+  if (validateAllFields(req.body)) {
+    try {
+      const newRecipe = await createRecipe(req.body);
+      res.json(newRecipe);
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  } else {
+    res.status(400).json({ error: 'Input is not valid', badInput: req.body });
   }
 });
 
 // I assume values of 'ingredients' and 'steps' can be empty arrays.
 // All field keys must exist.
 const validateAllFields = obj => {
-  if (typeof obj !== 'object') throw `Input is not object.`;
+  if (typeof obj !== 'object') return false;
 
   const expectedKeys = new Set(['title', 'ingredients', 'steps']);
   const objKeys = new Set(Object.keys(obj));
 
   for (const key of objKeys) {
     if (!expectedKeys.delete(key)) {
-      throw `The key ${key} of the input object ${obj} is not in the expect key set.`;
+      return false;
     }
   }
 
@@ -133,10 +125,10 @@ const validateAllFields = obj => {
     Array.isArray(obj.ingredients) &&
     Array.isArray(obj.steps)
   ) {
-    return;
+    return true;
   }
 
-  throw `The input object ${obj} is not valid.`;
+  return false;
 };
 
 module.exports = router;
