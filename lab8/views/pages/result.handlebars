@@ -1,11 +1,9 @@
 <section class="result-page-container">
-  <h4>Result</h4>
+  <h2>Result</h2>
   {{#if isPal}}
-  <h1>Your input is a palindrome.</h1>
+  <p class="result-page-is-pal-text ">Your input is a palindrome.</p>
   {{else}}
-  <h1>Your input is not a palindrome.</h1>
+  <p class="result-page-is-not-pal-text">Your input is not a palindrome.</p>
   {{/if}}
   <a href="/">Try another palindrome</a>
 </section>
-
-{{!-- TOOD: use different class for pal and not pal --}}
