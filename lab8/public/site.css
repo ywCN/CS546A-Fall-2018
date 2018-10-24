@@ -1,0 +1,17 @@
+.website-title-color {
+  color: red;
+}
+
+.website-title-font-size {
+  font-size: 40px;
+}
+
+.input-page-container {
+  background: rgba(111, 111, 111, 0.2);
+}
+
+.result-page-container {
+  background: rgba(15, 139, 52, 0.2);
+}
+
+/* TODO: different class for pal and not pal */
