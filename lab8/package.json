@@ -1,0 +1,16 @@
+{
+  "name": "lab8-youhaowang",
+  "version": "1.0.0",
+  "description": "For CS546 2018 fall lab8.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Youhao Wang",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0"
+  }
+}
