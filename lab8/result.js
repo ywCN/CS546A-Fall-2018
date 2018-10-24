@@ -6,22 +6,20 @@ router.post('/', (req, res) => {
 });
 
 const isPalindrome = str => {
-  // const regex = new RegExp('[a-z]', 'i');
   const validLetters = str
     .toLowerCase()
     .split('')
     .filter(letter => /[a-z]/i.test(letter));
-  // const validLetters = [];
-
-  // for (const letter of str.toLowerCase()) {
-  //   if (regex.test(letter)) {
-  //     validLetters.push(letter);
-  //   }
-  // }
 
   return validLetters.join() === validLetters.reverse().join();
 };
 
-isPalindrome('Go hang a salami, I’m a lasagna hog.');
+console.log(isPalindrome('Go hang a salami, I’m a lasagna hog.'));
+console.log(isPalindrome('Was it a cat I saw?'));
+console.log(isPalindrome('Madam'));
+console.log(isPalindrome('He did, eh?'));
+console.log(isPalindrome('bbdd'));
+console.log(isPalindrome('a'));
+console.log(isPalindrome('abc'));
 
 module.exports = router;
