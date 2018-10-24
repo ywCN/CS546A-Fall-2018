@@ -5,6 +5,7 @@ router.post('/', (req, res) => {
   res.render('pages/result', { isPal });
 });
 
+// I assume empty string is a palindrome
 const isPalindrome = str => {
   const validLetters = str
     .toLowerCase()
@@ -13,13 +14,5 @@ const isPalindrome = str => {
 
   return validLetters.join() === validLetters.reverse().join();
 };
-
-console.log(isPalindrome('Go hang a salami, I’m a lasagna hog.'));
-console.log(isPalindrome('Was it a cat I saw?'));
-console.log(isPalindrome('Madam'));
-console.log(isPalindrome('He did, eh?'));
-console.log(isPalindrome('bbdd'));
-console.log(isPalindrome('a'));
-console.log(isPalindrome('abc'));
 
 module.exports = router;
