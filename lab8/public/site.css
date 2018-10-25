@@ -48,3 +48,13 @@ body {
   font-size: 40px;
   color: rgba(255, 2, 2, 0.2);
 }
+
+.result-page-try-another-link {
+  border: 2px solid green;
+  text-decoration: none;
+}
+
+.result-page-try-another-link:hover {
+  background-color: blue;
+  color: white;
+}
