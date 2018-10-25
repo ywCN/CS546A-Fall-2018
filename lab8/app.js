@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 
 const routeConfig = require('./routeConfig');
+const static = express.static(__dirname + '/public');
 
 const app = express();
-const static = express.static(__dirname + '/public');
 app.use('/public', static);
 app.use(
   bodyParser.urlencoded({
