@@ -7,6 +7,8 @@ router.post('/', (req, res) => {
 
 // I assume empty string is a palindrome
 const isPalindrome = str => {
+  if (typeof str !== 'string') throw `Expect string but got ${typeof str}.`;
+
   const validLetters = str
     .toLowerCase()
     .split('')
