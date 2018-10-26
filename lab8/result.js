@@ -12,7 +12,7 @@ const isPalindrome = str => {
   const validLetters = str
     .toLowerCase()
     .split('')
-    .filter(letter => /[a-z]/i.test(letter));
+    .filter(letter => /[a-z0-9]/i.test(letter));
 
   return validLetters.join() === validLetters.reverse().join();
 };
